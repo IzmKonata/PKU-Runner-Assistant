@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RMainWindow</class>
+ <widget class="RMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>🏃‍♂️ 智能跑步计划系统</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* ===== 全局样式 ===== */
+QMainWindow {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #f0f9ff, stop:1 #e6f7ff);
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+}
+
+/* ===== 中央容器 ===== */
+QWidget#centralWidget {
+    background-color: transparent;
+}
+
+/* ===== 标题样式 ===== */
+QLabel#titleLabel {
+    font-size: 26px;
+    font-weight: 700;
+    color: #3498db;
+    padding: 15px 0;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+/* ===== 表格样式 - 完全自适应 ===== */
+QTableView {
+    background-color: white;
+    border: 1px solid #d0e5f0;
+    border-radius: 10px;
+    gridline-color: #e0f0ff;
+    selection-background-color: #d1e8ff;
+    selection-color: #1a5ca3;
+    font-size: 14px;
+    alternate-background-color: #f7fbff;
+    outline: 0; /* 移除焦点边框 */
+}
+
+QTableView::item {
+    padding: 12px 15px;
+}
+
+QTableView::item:selected {
+    background: #d1e8ff;
+    border-radius: 5px;
+}
+
+QTableView QHeaderView::section {
+    background-color: #e8f4ff;
+    padding: 14px 16px;
+    border: none;
+    border-bottom: 2px solid #3498db;
+    border-right: 1px solid #d0e5f0;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+QTableView QHeaderView::section:horizontal:last {
+    border-right: none;
+}
+
+QTableView QHeaderView::section:vertical {
+    border-bottom: none;
+    border-right: 2px solid #3498db;
+    font-size: 14px;
+    color: #2c3e50;
+    padding: 0 10px;
+}
+
+QTableView QScrollBar:vertical {
+    width: 12px;
+    background: #f0f7ff;
+    border-radius: 6px;
+}
+
+QTableView QScrollBar::handle:vertical {
+    background: #a0c8f0;
+    border-radius: 6px;
+    min-height: 30px;
+}
+
+QTableView QScrollBar::add-line:vertical,
+QTableView QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+QTableView QScrollBar:horizontal {
+    height: 12px;
+    background: #f0f7ff;
+    border-radius: 6px;
+}
+
+QTableView QScrollBar::handle:horizontal {
+    background: #a0c8f0;
+    border-radius: 6px;
+    min-width: 30px;
+}
+
+/* ===== 主界面按钮样式 ===== */
+QPushButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    min-width: 120px;
+    min-height: 40px;
+    transition: all 0.2s ease;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.25);
+}
+
+QPushButton:pressed {
+    background-color: #1c6ea4;
+    transform: translateY(1px);
+}
+
+QPushButton#addButton {
+    background-color: #2ecc71;
+}
+
+QPushButton#addButton:hover {
+    background-color: #27ae60;
+}
+
+QPushButton#deleteButton {
+    background-color: #e74c3c;
+}
+
+QPushButton#deleteButton:hover {
+    background-color: #c0392b;
+}
+
+QPushButton#generateButton {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #3498db, stop:1 #2980b9);
+}
+
+/* ===== 对话框按钮样式 ===== */
+QDialogButtonBox QPushButton {
+    min-width: 80px;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+/* ===== 状态栏样式 ===== */
+QStatusBar {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #e8f4ff, stop:1 #d9edff);
+    border-top: 1px solid #c0d8f0;
+    padding: 8px 15px;
+}
+
+QLabel#weekLabel {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+    padding: 5px 10px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 6px;
+    border: 1px solid #d0e5f0;
+    margin-right: 10px;
+}
+
+QToolButton {
+    background-color: #e3f2fd;
+    border: 1px solid #bbdefb;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 16px;
+    color: #3498db;
+    min-width: 36px;
+    min-height: 36px;
+    transition: all 0.2s ease;
+}
+
+QToolButton:hover {
+    background-color: #bbdefb;
+    border-color: #90caf9;
+    transform: scale(1.08);
+}
+
+QToolButton:pressed {
+    background-color: #90caf9;
+    border-color: #64b5f6;
+    transform: scale(0.95);
+}
+
+/* ===== 分隔线 ===== */
+QFrame#divider {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+        stop:0 #3498db, stop:0.5 #2ecc71, stop:1 #e74c3c);
+    min-height: 3px;
+    max-height: 3px;
+    border-radius: 2px;
+    margin: 15px 0;
+}
+
+/* ===== 响应式调整 ===== */
+@media screen and (max-width: 900px) {
+    QPushButton {
+        min-width: 100px;
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+
+    QTableView::item {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    QTableView QHeaderView::section {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    QDialogButtonBox QPushButton {
+        min-width: 70px;
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    QPushButton {
+        min-width: 80px;
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    QLabel#titleLabel {
+        font-size: 22px;
+    }
+
+    QDialogButtonBox QPushButton {
+        min-width: 60px;
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>15</number>
+    </property>
+    <property name="leftMargin">
+     <number>15</number>
+    </property>
+    <property name="topMargin">
+     <number>15</number>
+    </property>
+    <property name="rightMargin">
+     <number>15</number>
+    </property>
+    <property name="bottomMargin">
+     <number>15</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="titleLabel">
+      <property name="objectName">
+       <string>titleLabel</string>
+      </property>
+      <property name="text">
+       <string>🏃‍♂️ 智能跑步计划系统 🏃‍♀️</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTableView" name="tableView">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>1</horstretch>
+        <verstretch>1</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="showGrid">
+       <bool>true</bool>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <attribute name="verticalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>85</number>
+      </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>160</number>
+      </attribute>
+      <attribute name="horizontalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderMinimumSectionSize">
+       <number>60</number>
+      </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>100</number>
+      </attribute>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="divider">
+      <property name="objectName">
+       <string>divider</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::HLine</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="buttonLayout">
+      <property name="spacing">
+       <number>15</number>
+      </property>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addButton">
+        <property name="objectName">
+         <string>addButton</string>
+        </property>
+        <property name="toolTip">
+         <string>添加自定义日程</string>
+        </property>
+        <property name="text">
+         <string>📝 添加日程</string>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="deleteButton">
+        <property name="objectName">
+         <string>deleteButton</string>
+        </property>
+        <property name="toolTip">
+         <string>删除选中日程</string>
+        </property>
+        <property name="text">
+         <string>🗑️ 删除选中</string>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="generateButton">
+        <property name="objectName">
+         <string>generateButton</string>
+        </property>
+        <property name="toolTip">
+         <string>生成智能跑步计划</string>
+        </property>
+        <property name="text">
+         <string>🚀 生成计划</string>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="sizeGripEnabled">
+    <bool>true</bool>
+   </property>
+   <widget class="QLabel" name="weekLabel">
+    <property name="objectName">
+     <string>weekLabel</string>
+    </property>
+    <property name="text">
+     <string>📅 周次：2024-03-04 至 2024-03-10</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="prevWeekButton">
+    <property name="text">
+     <string>◀</string>
+    </property>
+    <property name="toolTip">
+     <string>上一周</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="nextWeekButton">
+    <property name="text">
+     <string>▶</string>
+    </property>
+    <property name="toolTip">
+     <string>下一周</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

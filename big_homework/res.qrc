@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>images/backmodule.jpg</file>
+        <file>images/jogging.jpg</file>
+        <file>images/bike.jpg</file>
+        <file>images/OIP.jpg</file>
+        <file>images/OIP (1).jpg</file>
+        <file>images/R.jpg</file>
+        <file>images/true.jpg</file>
+        <file>images/true (1).jpg</file>
+        <file>images/014 Amy Crisp.png</file>
+        <file>images/024 Near Moon.png</file>
+        <file>map_imgs/bg.jpg</file>
+        <file>map_imgs/bg_2.png</file>
+        <file>map_imgs/jingyuan.jpg</file>
+        <file>map_imgs/lake.jpg</file>
+        <file>map_imgs/langrun.jpg</file>
+        <file>map_imgs/lijiao.jpeg</file>
+        <file>map_imgs/R-C.jpg</file>
+        <file>map_imgs/snapshot.png</file>
+        <file>images/bkgd.png</file>
+        <file>images/retouch_2024112900065258.png</file>
+    </qresource>
+</RCC>
